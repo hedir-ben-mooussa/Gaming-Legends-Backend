@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/product")
 @Tag(name = "User API", description = "Operations related to users")
+@CrossOrigin(origins = "*") // Replace * with your frontend URL in production
 public class ProductController {
 
     @Autowired
@@ -37,15 +38,5 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
-    @GetMapping
-    public Page<Product> getProducts(
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) int category,
-            @RequestParam(required = false) float price,
-            @RequestParam(required = false) int quantity,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
-    ) {
-        return productService.getPaginatedProducts(name, category, price, quantity, page, size);
-    }
+
 }

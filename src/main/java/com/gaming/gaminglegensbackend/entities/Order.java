@@ -31,6 +31,16 @@ public class Order {
     @Column(nullable = false)
     private PaymentType paymentType;
 
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false)
+    private String country;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @ManyToMany
     @JoinTable(
             name = "order_product",

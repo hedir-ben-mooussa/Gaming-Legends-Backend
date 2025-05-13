@@ -1,5 +1,6 @@
 package com.gaming.gaminglegensbackend.controllers;
 
+import com.gaming.gaminglegensbackend.dto.OrderDto;
 import com.gaming.gaminglegensbackend.entities.Order;
 import com.gaming.gaminglegensbackend.services.OrderService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -9,8 +10,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/order")
-
+@RequestMapping("/orders")
+@CrossOrigin(origins = "*")
 public class OrderController {
 
     @Autowired
@@ -26,12 +27,17 @@ public class OrderController {
         return orderService.getOrderById(id);
    }
 
-   @PostMapping("/id")
-    public Order createOrder(@RequestBody Order order) {
+   @PostMapping()
+    public Order createOrder(@RequestBody OrderDto order) {
         return orderService.saveOrder(order);
    }
    @DeleteMapping("/{id}")
     public void deleteOrderById(@PathVariable int id) {
         orderService.deleteOrderById(id);
    }
+
+    @PatchMapping("complete-order/{id}")
+    public void changeOrder(@PathVariable int id) {
+        orderService.changeOrder(id);
+    }
 }

@@ -32,16 +32,5 @@ public class ProductService {
         productRepo.deleteById(id);
     }
 
-    public Page<Product> getPaginatedProducts(String name, int category, float price, int quantity, int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
 
-        // Fallbacks
-        name = (name == null) ? "" : name;
-        category = (category == 0) ? 0 : category;
-        price = (price == 0.0) ? (float) 0.0 : price;
-        quantity = (quantity == 0) ? 0 : quantity;
-
-        return productRepo.findByNameContainingIgnoreCaseAndCategoryContainingIgnoreCaseAndPriceBetween(
-                name, category, price, quantity, pageable);
-    }
 }
